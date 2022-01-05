@@ -16,14 +16,13 @@ func _process(_delta):
 		_on_QuitButton_pressed()
 
 func _on_StartButton_pressed():
-	SCENE_CHANGER.change_scene_to("res://Scenes/Worlds/World1.tscn")
 	GLOBAL_PLAYER_STATUS.running_status = GLOBAL_PLAYER_STATUS.PLAYING
 	get_tree().paused = false
+	SCENE_CHANGER.change_scene_to("res://Scenes/Worlds/World1.tscn")
 
 func _on_TestButton_pressed():
-	SCENE_CHANGER.change_scene_to("res://Scenes/FakeGame.tscn")
 	GLOBAL_PLAYER_STATUS.running_status = GLOBAL_PLAYER_STATUS.TEST
+	SCENE_CHANGER.change_scene_to("res://Scenes/FakeGame.tscn")
 
 func _on_QuitButton_pressed():
 	GLOBAL_PLAYER_STATUS.quit_game()
- 
