@@ -1,0 +1,9 @@
+## 官方文档 https://docs.godotengine.org/en/stable/getting_started/workflow/project_setup/version_control_systems.html#files-to-exclude-from-vcs
+# 导入 meta 文件
+.import/
+# C# 版本自动生成的文件
+.mono/
+# 导出预设 可能包含敏感信息 比如 Android 密钥
+export_presets.cfg
+# 根据 CSV 生成导入的二进制翻译文件
+*.translation

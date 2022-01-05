@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/GamePaused.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Music and Sounds/Pause.wav" type="AudioStream" id=2]
+
+[node name="GamePaused" type="ColorRect"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.501961 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 114.0
+margin_top = 71.0
+margin_right = 205.0
+margin_bottom = 109.0
+
+[node name="PausedTips" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 91.0
+margin_bottom = 14.0
+text = "Game Paused"
+
+[node name="BackButton" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 91.0
+margin_bottom = 38.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Back to Title"
+flat = true
+
+[node name="PauseAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+autoplay = true
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BackButton" to="." method="_on_BackButton_pressed"]
