@@ -19,7 +19,6 @@ var move_velocity: Vector2 = Vector2.ZERO
 var face_vector: Vector2 = Vector2.DOWN
 
 const PLAYER_HURT_SOUND_SCENE = preload("res://Entities/Player/PlayerHurtSound.tscn")
-const GAME_OVER_SCENE = preload("res://UI/GameOver.tscn")
 
 func do_move():
 	move_velocity = move_and_slide(move_velocity)
@@ -45,7 +44,7 @@ func idle_or_move_state():
 		move_velocity = move_velocity.move_toward(Vector2.ZERO, FRICTION)
 	do_move()
 	if Input.is_action_just_pressed("action_roll"):
-		#GLOBAL_PLAYER_STATUS.max_health -= 1 # 测试动态减少血量上限
+		#PLAYER_STATUS.max_health -= 1 # 测试动态减少血量上限
 		action_state = ROLL
 	if Input.is_action_just_pressed("action_attack"):
 		action_state = ATTACK
@@ -68,12 +67,13 @@ func attack_animation_finished():
 	action_state = MOVE
 
 func game_over():
-	get_node("/root/World1/GUI").add_child(GAME_OVER_SCENE.instance())
 	queue_free()
+	GM.running_status = GM.END
 
 func _ready():
-	GLOBAL_PLAYER_STATUS.connect("no_health", self, "game_over")
-	GLOBAL_PLAYER_STATUS.health = GLOBAL_PLAYER_STATUS.max_health
+	# warning-ignore:return_value_discarded
+	PLAYER_STATUS.connect("no_health", self, "game_over")
+	#PLAYER_STATUS.health = PLAYER_STATUS.max_health
 	animation_state_machine.active = true
 	sword_hitbox.knockback_vector = face_vector
 	sword_hitbox.KNOCKBACK_POWER = 100.0
@@ -91,7 +91,7 @@ func _physics_process(_delta):
 			attack_state()
 
 func _on_Hurtbox_area_entered(area):
-	GLOBAL_PLAYER_STATUS.health -= area.DAMAGE
+	PLAYER_STATUS.health -= area.DAMAGE
 	hurtbot.start_invincibility(1.0, true)
 	hurtbot.create_hit_effect()
 	get_parent().add_child(PLAYER_HURT_SOUND_SCENE.instance())

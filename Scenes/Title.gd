@@ -3,7 +3,6 @@ extends CanvasLayer
 onready var game_name = $ColorRect/CenterContainer/VBoxContainer/GameName
 
 func _ready():
-	GLOBAL_PLAYER_STATUS.running_status = GLOBAL_PLAYER_STATUS.IDLE
 	# TODO 设置 rect 未生效 切换场景后自动重置
 	game_name.set("parameters/rect_scale/x", 2)
 	#game_name.set("rect_scale/x", 2)
@@ -16,13 +15,10 @@ func _process(_delta):
 		_on_QuitButton_pressed()
 
 func _on_StartButton_pressed():
-	GLOBAL_PLAYER_STATUS.running_status = GLOBAL_PLAYER_STATUS.PLAYING
-	get_tree().paused = false
-	SCENE_CHANGER.change_scene_to("res://Scenes/Worlds/World1.tscn")
+	GM.running_status = GM.PLAY
 
 func _on_TestButton_pressed():
-	GLOBAL_PLAYER_STATUS.running_status = GLOBAL_PLAYER_STATUS.TEST
-	SCENE_CHANGER.change_scene_to("res://Scenes/FakeGame.tscn")
+	GM.running_status = GM.TEST
 
 func _on_QuitButton_pressed():
-	GLOBAL_PLAYER_STATUS.quit_game()
+	GM.quit_game()

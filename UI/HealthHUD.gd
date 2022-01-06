@@ -25,9 +25,9 @@ func set_hearts(new_hearts: float):
 
 func _ready():
 	# warning-ignore:return_value_discarded
-	GLOBAL_PLAYER_STATUS.connect("max_health_changed", self, "set_max_hearts")
+	PLAYER_STATUS.connect("max_health_changed", self, "set_max_hearts")
 	# warning-ignore:return_value_discarded
-	GLOBAL_PLAYER_STATUS.connect("health_changed", self, "set_hearts")
-	self.max_hearts = GLOBAL_PLAYER_STATUS.max_health
-	self.hearts = GLOBAL_PLAYER_STATUS.health
+	PLAYER_STATUS.connect("health_changed", self, "set_hearts")
+	self.max_hearts = PLAYER_STATUS.max_health
+	self.hearts = PLAYER_STATUS.health
 	update_hearts_text(hearts, max_hearts)

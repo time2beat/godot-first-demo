@@ -11,14 +11,15 @@ config_version=4
 [application]
 
 config/name="Fox Fight Bats"
-run/main_scene="res://Scenes/Title.tscn"
+run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-GLOBAL_PLAYER_STATUS="*res://Entities/Player/PlayerStatus.tscn"
 UTILS="*res://Scripts/CommonUtils.tscn"
 SCENE_CHANGER="*res://Scenes/SceneChanger.tscn"
+GM="*res://Scripts/GameManager.tscn"
+PLAYER_STATUS="*res://Entities/Player/PlayerStatus.tscn"
 
 [display]
 
