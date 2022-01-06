@@ -30,8 +30,7 @@ func set_running_status(new_status: int) -> void:
 			get_parent().add_child(UNPAUSE_SOUND_SCENE.instance())
 		END:
 			running_status = END
-			print("玩家死亡 重置子弹时间")
-			TIME_MACHINE.time_scale = 1.0
+			toggle_bullet_time(false)
 			get_node("/root/World1/GUI").add_child(GAME_OVER_SCENE.instance())
 		TEST:
 			running_status = TEST
@@ -42,11 +41,16 @@ func quit_game() -> void:
 
 func toggle_bullet_time(enable: bool = false) -> void:
 	tween.remove_all()
+	var camera = get_node("/root/World1/GUI/Control/Camera2D")
+	var camera_zoom: float = 0.85
 	if enable:
-		#get_node("/root/World1")
-		tween.interpolate_property(TIME_MACHINE, "time_scale", null, 1.0, 0.5)
-	else:
+		if camera != null:
+			tween.interpolate_property(camera, "zoom", null, Vector2(camera_zoom, camera_zoom), 0.5)
 		tween.interpolate_property(TIME_MACHINE, "time_scale", null, 0.2, 0.5)
+	else:
+		tween.interpolate_property(TIME_MACHINE, "time_scale", null, 1.0, 0.5)
+		if camera != null:
+			tween.interpolate_property(camera, "zoom", null, Vector2(1.0, 1.0), 0.5)
 	tween.start()
 
 func _physics_process(_delta) -> void:
@@ -57,7 +61,7 @@ func _physics_process(_delta) -> void:
 					self.running_status = PAUSE
 				elif Input.is_action_just_pressed("toggle_bullet_time"):
 					# 使用补间提供渐变效果
-					if TIME_MACHINE.time_scale <= 0.2:
+					if TIME_MACHINE.time_scale == 1.0:
 						toggle_bullet_time(true)
 					else:
 						toggle_bullet_time(false)

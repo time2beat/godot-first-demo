@@ -42,6 +42,8 @@
 - [x] 添加循环 BGM
 - [x] 引入 Game Manager 全局单例（Singleton）来管理游戏状态机，重构开始，结束，暂停，回到游戏等实现
 - [x] 利用 `Engine.time_scale` 和 `AudioServer.global_rate_scale` 以及补间（`Tween`）节点实现自然渐变的<ruby><rb>子弹时间</rb><rp>（</rp><rt>bullet time</rt><rp>）</rp></ruby>效果
+- [x] 继续补间（`Tween`）节点给子弹时间添加渐变的镜头缩放（`zoom`）效果
+- [ ] 优化无敌帧实际运算
 
 ### Bugs
 
