@@ -41,6 +41,7 @@
 - [ ] 清关庆祝提示
 - [x] 添加循环 BGM
 - [x] 引入 Game Manager 全局单例（Singleton）来管理游戏状态机，重构开始，结束，暂停，回到游戏等实现
+- [x] 利用 `Engine.time_scale` 和 `AudioServer.global_rate_scale` 以及补间（`Tween`）节点实现自然渐变的<ruby><rb>子弹时间</rb><rp>（</rp><rt>bullet time</rt><rp>）</rp></ruby>效果
 
 ### Bugs
 
