@@ -39,18 +39,16 @@ func set_running_status(new_status: int) -> void:
 func quit_game() -> void:
 	get_tree().quit()
 
-func toggle_bullet_time(enable: bool = false) -> void:
+func toggle_bullet_time(enable_bullet_time: bool = false) -> void:
+	var enabled: int = 1 if enable_bullet_time else 0
+	var tween_time: float = 0.5
+	var time_scale: Array = [1.0, 0.25]
+	var camera_zoom: Array = [1.0, 0.85]
 	tween.remove_all()
 	var camera = get_node("/root/World1/GUI/Control/Camera2D")
-	var camera_zoom: float = 0.85
-	if enable:
-		if camera != null:
-			tween.interpolate_property(camera, "zoom", null, Vector2(camera_zoom, camera_zoom), 0.5)
-		tween.interpolate_property(TIME_MACHINE, "time_scale", null, 0.2, 0.5)
-	else:
-		tween.interpolate_property(TIME_MACHINE, "time_scale", null, 1.0, 0.5)
-		if camera != null:
-			tween.interpolate_property(camera, "zoom", null, Vector2(1.0, 1.0), 0.5)
+	if camera != null:
+		tween.interpolate_property(camera, "zoom", null, Vector2(camera_zoom[enabled], camera_zoom[enabled]), tween_time)
+	tween.interpolate_property(TIME_MACHINE, "time_scale", null, time_scale[enabled], tween_time)
 	tween.start()
 
 func _physics_process(_delta) -> void:
